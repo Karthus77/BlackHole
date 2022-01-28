@@ -1,0 +1,311 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>机器学习笔记-Week01 | Peak</title><meta name="author" content="Karthus"><meta name="copyright" content="Karthus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="深度学习和pytorch基础 机器学习是实现人工智能的手段，其目的在于使得程序有能够利用过往经验自主学习，优化答案 而深度学习是实现机器学习的一种具体方法  机器学习的模型分类对于一个具体的问题，可以通过模型-&gt;策略 -&gt;算法进行求解  对于数据分类问题，我们可以将模型分为监督学习模型和无监督学习模型  监督学习顾名思义，监督学习是基于人为标记监督的，在数据中，通过数据学习标记分界面，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习笔记-Week01">
+<meta property="og:url" content="http://www.peakhuang.com/article/2022/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Week01.html">
+<meta property="og:site_name" content="Peak">
+<meta property="og:description" content="深度学习和pytorch基础 机器学习是实现人工智能的手段，其目的在于使得程序有能够利用过往经验自主学习，优化答案 而深度学习是实现机器学习的一种具体方法  机器学习的模型分类对于一个具体的问题，可以通过模型-&gt;策略 -&gt;算法进行求解  对于数据分类问题，我们可以将模型分为监督学习模型和无监督学习模型  监督学习顾名思义，监督学习是基于人为标记监督的，在数据中，通过数据学习标记分界面，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/0075eY9ggy1gytj39tujfj30ot0blwly.jpg">
+<meta property="article:published_time" content="2022-01-28T09:44:02.000Z">
+<meta property="article:modified_time" content="2022-01-28T09:46:17.198Z">
+<meta property="article:author" content="Karthus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tva1.sinaimg.cn/large/0075eY9ggy1gytj39tujfj30ot0blwly.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.peakhuang.com/article/2022/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Week01"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '机器学习笔记-Week01',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-28 17:46:17'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-broom"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-book-dead"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('http://tva1.sinaimg.cn/large/0075eY9ggy1gytj39tujfj30ot0blwly.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Peak</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-broom"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-book-dead"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">机器学习笔记-Week01</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-28T09:44:02.000Z" title="发表于 2022-01-28 17:44:02">2022-01-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-28T09:46:17.198Z" title="更新于 2022-01-28 17:46:17">2022-01-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="机器学习笔记-Week01"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="深度学习和pytorch基础"><a href="#深度学习和pytorch基础" class="headerlink" title="深度学习和pytorch基础"></a>深度学习和pytorch基础</h1><blockquote>
+<p>机器学习是实现人工智能的手段，其目的在于使得程序有能够利用过往经验自主学习，优化答案</p>
+<p>而深度学习是实现机器学习的一种具体方法</p>
+</blockquote>
+<h2 id="机器学习的模型分类"><a href="#机器学习的模型分类" class="headerlink" title="机器学习的模型分类"></a>机器学习的模型分类</h2><p>对于一个具体的问题，可以通过模型-&gt;策略 -&gt;算法进行求解 </p>
+<p>对于数据分类问题，我们可以将模型分为监督学习模型和无监督学习模型 </p>
+<h3 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h3><p>顾名思义，监督学习是基于人为标记监督的，在数据中，通过数据学习标记分界面，可以利用决策函数达到预测分析的目的</p>
+<h3 id="无监督学习"><a href="#无监督学习" class="headerlink" title="无监督学习"></a>无监督学习</h3><p>无监督学习由于没有对数据进行标记，对于数据只有不同的分布，而它只能从数据分布中产生描述数据的功能</p>
+<h3 id="半监督学习"><a href="#半监督学习" class="headerlink" title="半监督学习"></a>半监督学习</h3><p>半监督学习对于部分数据进行标记，可以减少人为的工作</p>
+<h3 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h3><p>强化学习像是对无监督学习的一种升级，在无监督学习结果的基础上进行人为反馈结果</p>
+<h3 id="参数模型"><a href="#参数模型" class="headerlink" title="参数模型"></a>参数模型</h3><p>基于数据分布假设，可以 通过足量数据推出概率分布函数</p>
+<h3 id="非参数模型"><a href="#非参数模型" class="headerlink" title="非参数模型"></a>非参数模型</h3><p>数据本身带有统计特性，非参数模型自适应数据，没有具体的数据分布参数</p>
+<h3 id="生成模型"><a href="#生成模型" class="headerlink" title="生成模型"></a>生成模型</h3><p>生成模型是对于监督学习模型的数据作为对象，利用联合分布概率$P(X,Y)$建模，生成数据对应的函数结果</p>
+<h3 id="判别模型"><a href="#判别模型" class="headerlink" title="判别模型"></a>判别模型</h3><p>判别模型是在已知函数的情况，对数据结果进行预测</p>
+<blockquote>
+<p>在过去的机器学习中，需要大量的数据和人工反馈结果，导致机器学习的耗时和结果具有局限性，而现在我们希望利用尽可能少量的数据交给机器进行自主学习。然而机器学习由于是高度依赖数据的，因此仍然存在一些问题，例如容易被噪点污染攻击，缺乏联想推理能力，易被具有极端特性的数据影响，难以确定错误等等。</p>
+</blockquote>
+<h2 id="神经网络基础"><a href="#神经网络基础" class="headerlink" title="神经网络基础"></a>神经网络基础</h2><blockquote>
+<p>人们受到神经元多输入单输出，时间和空间不同步等等特性的启发，利用数学语言描述了一种函数方法，称之为激活函数</p>
+</blockquote>
+<h3 id="单层感知器"><a href="#单层感知器" class="headerlink" title="单层感知器"></a>单层感知器</h3><p>激活函数就相当与一种处理函数，当函数在什么条件下被激活就类比于在什么样的输入下能够有着什么样的输出，对于不同的输出，我们可以人为定义这些输出符号所对应的特殊含义。非线性的激活函数可以帮助我们对数据有着更多的情况处理。</p>
+<p>由于单个激活函数的功能局限，它只能把一个逻辑空间化为有限部分，分类作业具有局限性，但是对于非线性问题，单层感知器无法解决。在逻辑空间中，由于激活函数相当于逻辑空间中的一条线，所有对于非线性的空间划分（即需要多条线的划分）的问题，急需要利用多层感知器实现，类比于数字逻辑中的一些列复杂逻辑都可以利用与或非门的逻辑组合来实现。利用激活函数，人们构建了从逻辑数学到数字数学的桥梁。</p>
+<h3 id="万有逼近定理"><a href="#万有逼近定理" class="headerlink" title="万有逼近定理"></a>万有逼近定理</h3><blockquote>
+<p>如果一个隐层包含足够多的神经元，三层前馈神经网络能以任意精度逼近任意预定的连续函数</p>
+</blockquote>
+<p>万有逼近定理启示我们对于任意复杂问题利用神经网络都能建模</p>
+<h3 id="神经网络每一层的作用"><a href="#神经网络每一层的作用" class="headerlink" title="神经网络每一层的作用"></a>神经网络每一层的作用</h3><p>每一层数学公式 $\overrightarrow{y}=a(W·\overrightarrow{x}+b)$</p>
+<p>利用线性代数的空间解释可以视为对矩阵空间进行一系列的空间变换，乘以一个矩阵是对空间的扭曲变换，加上常数可视为对空间的平移</p>
+<p>对于那么类比于神经网络的层数，即增加激活函数的次数，激活函数是非线性函数，即对空间有了更多区域划分</p>
+<p>而节点则可对空间进行一系列升降维空间转换等操作。</p>
+<p>利用神经网络，我们可以将原始数据各自映射到线性可分的空间结果上，从而对数据进行分类预测等操作</p>
+<p>神经网络的<strong>深度(层数)</strong>和<strong>宽度(节点数)</strong>对于空间的贡献是不同的，深度的贡献是指数级的，而宽度的贡献是线性的</p>
+<h3 id="神经网络的参数学习-误差反向传播"><a href="#神经网络的参数学习-误差反向传播" class="headerlink" title="神经网络的参数学习:误差反向传播"></a>神经网络的参数学习:误差反向传播</h3><p>我们希望得到一个神经网络模型，对于一个多层神经网络，我们可以利用一个复合的非线性多元函数去描述，那么这个多元函数的参数如何取确定呢？我们可以利用误差反向传播这样一个机制。</p>
+<p>给定训练数据${｛x^i,y^i｝}$,我们会产生结果，并将结果回传，我们希望产生结果数据和真实值的误差尽可能的小。</p>
+<p>回转和更新神经网络的机制就是利用<strong>梯度</strong></p>
+<p>参数会根据梯度进行调整不断逼近使得参数误差变小</p>
+<h3 id="深层神经网络的问题-梯度消失"><a href="#深层神经网络的问题-梯度消失" class="headerlink" title="深层神经网络的问题:梯度消失"></a>深层神经网络的问题:梯度消失</h3><p>我们知道我们的误差反馈将利用梯度传播，但由于复合函数的特性，使得部分梯度在传播的过程中大幅变小，造成梯度消失这样一个问题</p>
+<p>为了解决这样一个问题，我们可以使用逐层预训练的方法</p>
+<h3 id="逐层预训练"><a href="#逐层预训练" class="headerlink" title="逐层预训练"></a>逐层预训练</h3><p>对于每一层神经网络的参数，我们采用逐层预训练的方式就避免了传递过程中的梯度消失</p>
+<h3 id="受限玻尔兹曼机和自编码器"><a href="#受限玻尔兹曼机和自编码器" class="headerlink" title="受限玻尔兹曼机和自编码器"></a>受限玻尔兹曼机和自编码器</h3><p>在逐层预训练的过程中由于缺乏对照的正确的实现结果（没有隐层结果),利用自编码器将结果进行解码在与输入进行对比来逐步确定参数。利用堆叠自编码器进行全网络微调</p>
+<h3 id="解决梯度消失"><a href="#解决梯度消失" class="headerlink" title="解决梯度消失"></a>解决梯度消失</h3><p>利用无监督数据进行分层预训练</p>
+<p>用更好的激活函数，避免某些函数的梯度消失</p>
+<p>利用辅助损失函数  </p>
+<h2 id="利用人工神经网络解决监督学习分类问题"><a href="#利用人工神经网络解决监督学习分类问题" class="headerlink" title="利用人工神经网络解决监督学习分类问题"></a>利用人工神经网络解决监督学习分类问题</h2><blockquote>
+<p>我们给定一个螺旋模型，样本由3部分组成，我们将基于该模型对图中的任意一点进行预测划分</p>
+</blockquote>
+<div>            <!--块级封装-->
+    <center>    <!--将图片和文字居中-->
+    <img src= "http://tva1.sinaimg.cn/large/0075eY9ggy1gytev13bngj30an09z40r.jpg"
+         alt="无法显示图片时显示的文字"
+         style="zoom:这里写图片的缩放百分比"/>
+    <br>        <!--换行-->
+    带有高斯噪点的螺旋图    <!--标题-->
+    </center>
+</div>
+
+<p>带有高斯噪点的模型图更接近于真实数据</p>
+<p>我们可以观察到对于图中的三个样本并不是线性可分的，按照线性划分的方法对于其中的某一块区域存在着不同的样本</p>
+<p>为了解决这样的问题我们可以利用两种方式，一种是将数据通过空间变换转成线性可分的，另一种是利用神经网络得到合适的非线性数据划分</p>
+<h3 id="构建螺旋分类模型"><a href="#构建螺旋分类模型" class="headerlink" title="构建螺旋分类模型"></a>构建螺旋分类模型</h3><p>二维坐标中的每个点相当于一个向量，有三个样本，每个样本有1000个二维向量</p>
+<p>这是模型的输入，构造一个3000行2维的向量构建螺旋空间 </p>
+<p>并对每个向量进行标记对应的种类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">X = torch.zeros(N * C, D).to(device)</span><br><span class="line">Y = torch.zeros(N * C, dtype=torch.long).to(device)</span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(C):</span><br><span class="line">    index = <span class="number">0</span></span><br><span class="line">    t = torch.linspace(<span class="number">0</span>, <span class="number">1</span>, N) <span class="comment"># 在[0，1]间均匀的取10000个数，赋给t</span></span><br><span class="line">    <span class="comment"># 下面的代码不用理解太多，总之是根据公式计算出三类样本（可以构成螺旋形）</span></span><br><span class="line">    <span class="comment"># torch.randn(N) 是得到 N 个均值为0，方差为 1 的一组随机数，注意要和 rand 区分开</span></span><br><span class="line">    inner_var = torch.linspace( (<span class="number">2</span>*math.pi/C)*c, (<span class="number">2</span>*math.pi/C)*(<span class="number">2</span>+c), N) + torch.randn(N) * <span class="number">0.2</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 每个样本的(x,y)坐标都保存在 X 里</span></span><br><span class="line">    <span class="comment"># Y 里存储的是样本的类别，分别为 [0, 1, 2]</span></span><br><span class="line">    <span class="keyword">for</span> ix <span class="keyword">in</span> <span class="built_in">range</span>(N * c, N * (c + <span class="number">1</span>)):</span><br><span class="line">        X[ix] = t[index] * torch.FloatTensor((math.sin(inner_var[index]), math.cos(inner_var[index])))</span><br><span class="line">        Y[ix] = c</span><br><span class="line">        index += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Shapes:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;X:&quot;</span>, X.size())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Y:&quot;</span>, Y.size())</span><br></pre></td></tr></table></figure>
+<h3 id="构建线性模型分类"><a href="#构建线性模型分类" class="headerlink" title="构建线性模型分类"></a>构建线性模型分类</h3><p>形如 $y=wx+b$ 的线性函数我们利用线性函数对数据进行训练，则需要一个损失函数计算，并通过梯度反向传播对我们的线性函数进行优化</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">learning_rate = <span class="number">1e-3</span></span><br><span class="line">lambda_l2 = <span class="number">1e-5</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># nn 包用来创建线性模型</span></span><br><span class="line"><span class="comment"># 每一个线性模型都包含 weight 和 bias</span></span><br><span class="line">model = nn.Sequential(</span><br><span class="line">    nn.Linear(D, H),</span><br><span class="line">    nn.Linear(H, C)</span><br><span class="line">)</span><br><span class="line">model.to(device) <span class="comment"># 把模型放到GPU上</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># nn 包含多种不同的损失函数，这里使用的是交叉熵（cross entropy loss）损失函数</span></span><br><span class="line">criterion = torch.nn.CrossEntropyLoss()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里使用 optim 包进行随机梯度下降(stochastic gradient descent)优化</span></span><br><span class="line">optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, weight_decay=lambda_l2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始训练</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">    <span class="comment"># 把数据输入模型，得到预测结果</span></span><br><span class="line">    y_pred = model(X)</span><br><span class="line">    <span class="comment"># 计算损失和准确率</span></span><br><span class="line">    loss = criterion(y_pred, Y)</span><br><span class="line">    score, predicted = torch.<span class="built_in">max</span>(y_pred, <span class="number">1</span>)</span><br><span class="line">    acc = (Y == predicted).<span class="built_in">sum</span>().<span class="built_in">float</span>() / <span class="built_in">len</span>(Y)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;[EPOCH]: %i, [LOSS]: %.6f, [ACCURACY]: %.3f&#x27;</span> % (t, loss.item(), acc))</span><br><span class="line">    display.clear_output(wait=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 反向传播前把梯度置 0 </span></span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    <span class="comment"># 反向传播优化 </span></span><br><span class="line">    loss.backward()</span><br><span class="line">    <span class="comment"># 更新全部参数</span></span><br><span class="line">    optimizer.step()</span><br></pre></td></tr></table></figure>
+<p>我们可以看到在训练部分的代码中，我们会计算损失和准确率并输出对应参数</p>
+<p>在反向传播的过程中有一个梯度置0操作，这是因为PyTorch会默认对梯度进行累加(据说这样是因为可以降低对GPU的要求)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[EPOCH]: 999, [LOSS]: 0.864019, [ACCURACY]: 0.500</span><br></pre></td></tr></table></figure>
+<p>我们可以看到准确率只有50%</p>
+<p><img src="http://tva1.sinaimg.cn/large/0075eY9ggy1gyti9kh5c3j30jg0dyq69.jpg" alt="image.png"></p>
+<p>观察线性模型可知这两层对应于我们模型的两个输入，第一层输入是100个样本的神经节点，利用的数据是生成的3000个二维向量，第二层是我们的监督数据，也就是我们对应的人工划分。</p>
+<p>可以看出这就是一个简单的监督学习分类的线性模型，而该模型的划分从图中我们可以看出来并不是很准确的</p>
+<h3 id="加入激活函数构建两层神经网络分类"><a href="#加入激活函数构建两层神经网络分类" class="headerlink" title="加入激活函数构建两层神经网络分类"></a>加入激活函数构建两层神经网络分类</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">learning_rate = <span class="number">1e-3</span></span><br><span class="line">lambda_l2 = <span class="number">1e-5</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里可以看到，和上面模型不同的是，在两层之间加入了一个 ReLU 激活函数</span></span><br><span class="line">model = nn.Sequential(</span><br><span class="line">    nn.Linear(D, H),</span><br><span class="line">    nn.ReLU(),</span><br><span class="line">    nn.Linear(H, C)</span><br><span class="line">)</span><br><span class="line">model.to(device)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面的代码和之前是完全一样的，这里不过多叙述</span></span><br><span class="line">criterion = torch.nn.CrossEntropyLoss()</span><br><span class="line">optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=lambda_l2) <span class="comment"># built-in L2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练模型，和之前的代码是完全一样的</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">    y_pred = model(X)</span><br><span class="line">    loss = criterion(y_pred, Y)</span><br><span class="line">    score, predicted = torch.<span class="built_in">max</span>(y_pred, <span class="number">1</span>)</span><br><span class="line">    acc = ((Y == predicted).<span class="built_in">sum</span>().<span class="built_in">float</span>() / <span class="built_in">len</span>(Y))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[EPOCH]: %i, [LOSS]: %.6f, [ACCURACY]: %.3f&quot;</span> % (t, loss.item(), acc))</span><br><span class="line">    display.clear_output(wait=<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># zero the gradients before running the backward pass.</span></span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    <span class="comment"># Backward pass to compute the gradient</span></span><br><span class="line">    loss.backward()</span><br><span class="line">    <span class="comment"># Update params</span></span><br><span class="line">    optimizer.step()</span><br></pre></td></tr></table></figure>
+<p>可以看出，我们在两层模型中加入了ReLu()激活函数</p>
+<p><img src="http://tva1.sinaimg.cn/large/0075eY9ggy1gytig4b2fmj30c207v750.jpg" alt="image.png"></p>
+<p>加入激活函数，意味着模型具有了处理非线性划分的能力，我们观察训练之后的结果</p>
+<p>可以看出准确率得到了很大的提高</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[EPOCH]: 999, [LOSS]: 0.178409, [ACCURACY]: 0.949</span><br></pre></td></tr></table></figure>
+<p><img src="http://tva1.sinaimg.cn/large/0075eY9ggy1gytihegb2qj30iq0em42i.jpg" alt="image.png"></p>
+<p>模型的层数也变成了一个输入层和两个处理的神经网络，我们可以看到划分在局部边缘虽然还是有一些不准确，这可能是我们数据量太少造成的，不过整体上的准确率已经到了一个很高的水平</p>
+<p><strong>参考资料</strong>：</p>
+<p><a target="_blank" rel="noopener" href="https://atcold.github.io/pytorch-Deep-Learning/en/week02/02-3/">Artificial neural networks</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/OUCTheoryGroup/colab_demo/blob/master/03_Spiral_Classification.ipynb">中国海洋大学视觉实验室前沿理论小组 PyTorch 学习</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=WAn6lip5oWk&amp;t=150s">Week 2 – Practicum: Training a neural network</a>                        </p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Karthus</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.peakhuang.com/article/2022/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Week01.html">http://www.peakhuang.com/article/2022/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Week01.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.peakhuang.com" target="_blank">Peak</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="http://tva1.sinaimg.cn/large/0075eY9ggy1gytj39tujfj30ot0blwly.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/article/2022/%E5%B9%B6%E6%9F%A5%E9%9B%86.html"><img class="next-cover" src="http://tva1.sinaimg.cn/large/0075eY9ggy1gyjcqpda52j30rs0dwq52.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">算法01-并查集</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Karthus</div><div class="author-info__description">心有猛虎，细嗅蔷薇</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Karthus77"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Karthus77" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:yellowstar2001@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客！我会经常分享一些内容！希望对你有所帮助</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%92%8Cpytorch%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">深度学习和pytorch基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%A8%A1%E5%9E%8B%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.</span> <span class="toc-text">机器学习的模型分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.1.1.</span> <span class="toc-text">监督学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.1.2.</span> <span class="toc-text">无监督学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.1.3.</span> <span class="toc-text">半监督学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.1.4.</span> <span class="toc-text">强化学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.5.</span> <span class="toc-text">参数模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.6.</span> <span class="toc-text">非参数模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.7.</span> <span class="toc-text">生成模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E5%88%AB%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.8.</span> <span class="toc-text">判别模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80"><span class="toc-number">1.2.</span> <span class="toc-text">神经网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%B1%82%E6%84%9F%E7%9F%A5%E5%99%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">单层感知器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%87%E6%9C%89%E9%80%BC%E8%BF%91%E5%AE%9A%E7%90%86"><span class="toc-number">1.2.2.</span> <span class="toc-text">万有逼近定理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%AF%8F%E4%B8%80%E5%B1%82%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.2.3.</span> <span class="toc-text">神经网络每一层的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%8F%82%E6%95%B0%E5%AD%A6%E4%B9%A0-%E8%AF%AF%E5%B7%AE%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-number">1.2.4.</span> <span class="toc-text">神经网络的参数学习:误差反向传播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E9%97%AE%E9%A2%98-%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1"><span class="toc-number">1.2.5.</span> <span class="toc-text">深层神经网络的问题:梯度消失</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%90%E5%B1%82%E9%A2%84%E8%AE%AD%E7%BB%83"><span class="toc-number">1.2.6.</span> <span class="toc-text">逐层预训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%97%E9%99%90%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E6%9C%BA%E5%92%8C%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8"><span class="toc-number">1.2.7.</span> <span class="toc-text">受限玻尔兹曼机和自编码器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1"><span class="toc-number">1.2.8.</span> <span class="toc-text">解决梯度消失</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%A7%A3%E5%86%B3%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="toc-number">1.3.</span> <span class="toc-text">利用人工神经网络解决监督学习分类问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E8%9E%BA%E6%97%8B%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.1.</span> <span class="toc-text">构建螺旋分类模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E5%88%86%E7%B1%BB"><span class="toc-number">1.3.2.</span> <span class="toc-text">构建线性模型分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E5%85%A5%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E6%9E%84%E5%BB%BA%E4%B8%A4%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%88%86%E7%B1%BB"><span class="toc-number">1.3.3.</span> <span class="toc-text">加入激活函数构建两层神经网络分类</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/article/2022/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Week01.html" title="机器学习笔记-Week01"><img src="http://tva1.sinaimg.cn/large/0075eY9ggy1gytj39tujfj30ot0blwly.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="机器学习笔记-Week01"/></a><div class="content"><a class="title" href="/article/2022/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Week01.html" title="机器学习笔记-Week01">机器学习笔记-Week01</a><time datetime="2022-01-28T09:44:02.000Z" title="发表于 2022-01-28 17:44:02">2022-01-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/2022/%E5%B9%B6%E6%9F%A5%E9%9B%86.html" title="算法01-并查集"><img src="http://tva1.sinaimg.cn/large/0075eY9ggy1gyjcqpda52j30rs0dwq52.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法01-并查集"/></a><div class="content"><a class="title" href="/article/2022/%E5%B9%B6%E6%9F%A5%E9%9B%86.html" title="算法01-并查集">算法01-并查集</a><time datetime="2022-01-19T12:27:23.000Z" title="发表于 2022-01-19 20:27:23">2022-01-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/2022/%E5%8C%86%E5%8C%86%E5%BF%99%E5%BF%99%E9%87%8C%EF%BC%8C%E6%88%91%E5%BF%98%E4%BA%86%E6%88%91%E6%98%AF%E8%B0%81.html" title="匆匆忙忙里，我忘了我是谁"><img src="http://tva1.sinaimg.cn/large/0075eY9ggy1gyj5r85cvqj30sg0g0q8b.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="匆匆忙忙里，我忘了我是谁"/></a><div class="content"><a class="title" href="/article/2022/%E5%8C%86%E5%8C%86%E5%BF%99%E5%BF%99%E9%87%8C%EF%BC%8C%E6%88%91%E5%BF%98%E4%BA%86%E6%88%91%E6%98%AF%E8%B0%81.html" title="匆匆忙忙里，我忘了我是谁">匆匆忙忙里，我忘了我是谁</a><time datetime="2022-01-16T11:48:20.000Z" title="发表于 2022-01-16 19:48:20">2022-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/2021/LAPart1.html" title="Part01方程组解的几何解释"><img src="http://tva1.sinaimg.cn/large/0075eY9ggy1gwuud234x3j30vw0k00we.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Part01方程组解的几何解释"/></a><div class="content"><a class="title" href="/article/2021/LAPart1.html" title="Part01方程组解的几何解释">Part01方程组解的几何解释</a><time datetime="2021-11-28T08:12:45.000Z" title="发表于 2021-11-28 16:12:45">2021-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/2021/LinearAlgebraNoteIntroduction.html" title="线性代数笔记导论"><img src="http://tva1.sinaimg.cn/large/0075eY9ggy1gwuud234x3j30vw0k00we.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="线性代数笔记导论"/></a><div class="content"><a class="title" href="/article/2021/LinearAlgebraNoteIntroduction.html" title="线性代数笔记导论">线性代数笔记导论</a><time datetime="2021-11-28T05:29:38.000Z" title="发表于 2021-11-28 13:29:38">2021-11-28</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('http://tva1.sinaimg.cn/large/0075eY9gly1gwsyv534kjj31cq0r547a.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Karthus</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hello! Welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'VOF3j9UVasg3yfVgryTJ6XXq-gzGzoHsz',
+      appKey: 'pz8CPKHqgy1SsI0O5D0yo6kl',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
