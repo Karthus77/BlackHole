@@ -1,0 +1,341 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Git使用教程 | Peak</title><meta name="keywords" content="Git"><meta name="author" content="Karthus"><meta name="copyright" content="Karthus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Git使用教程从大一就开始用git了，但是一直以来都是想到哪用到哪，时间一长一些命令就容易忘，这次就系统地记录一下git命名，也方便后续查询 在这里推荐一个可视化学习Git的网站 Git学习 Git基本概念 git工作区工作区就是当前git的仓库的目录，工作区独立于各个分支 git版本库git将所有版本通过一棵有向树的形式存储，存放所有已经提交到本地仓库的代码版本 git暂存区git暂存区是工作区">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git使用教程">
+<meta property="og:url" content="http://www.peakhuang.com/article/2022/Git%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B.html">
+<meta property="og:site_name" content="Peak">
+<meta property="og:description" content="Git使用教程从大一就开始用git了，但是一直以来都是想到哪用到哪，时间一长一些命令就容易忘，这次就系统地记录一下git命名，也方便后续查询 在这里推荐一个可视化学习Git的网站 Git学习 Git基本概念 git工作区工作区就是当前git的仓库的目录，工作区独立于各个分支 git版本库git将所有版本通过一棵有向树的形式存储，存放所有已经提交到本地仓库的代码版本 git暂存区git暂存区是工作区">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/0075eY9ggy1h8ib6aw52aj30p00fkdn9.jpg">
+<meta property="article:published_time" content="2022-11-17T06:48:29.000Z">
+<meta property="article:modified_time" content="2022-11-26T02:14:19.130Z">
+<meta property="article:author" content="Karthus">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tva1.sinaimg.cn/large/0075eY9ggy1h8ib6aw52aj30p00fkdn9.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.peakhuang.com/article/2022/Git%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Git使用教程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-26 10:14:19'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-broom"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-book-dead"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('http://tva1.sinaimg.cn/large/0075eY9ggy1h8ib48jtl7j31jj0rstg6.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Peak</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-broom"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-book-dead"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Git使用教程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-17T06:48:29.000Z" title="发表于 2022-11-17 14:48:29">2022-11-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-26T02:14:19.130Z" title="更新于 2022-11-26 10:14:19">2022-11-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/">软件工具</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Git使用教程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Git使用教程"><a href="#Git使用教程" class="headerlink" title="Git使用教程"></a>Git使用教程</h1><p>从大一就开始用git了，但是一直以来都是想到哪用到哪，时间一长一些命令就容易忘，这次就系统地记录一下git命名，也方便后续查询</p>
+<p>在这里推荐一个可视化学习Git的网站</p>
+<p><a target="_blank" rel="noopener" href="https://learngitbranching.js.org/?locale=zh_CN">Git学习</a></p>
+<h2 id="Git基本概念"><a href="#Git基本概念" class="headerlink" title="Git基本概念"></a>Git基本概念</h2><p><img src="http://tva1.sinaimg.cn/large/0075eY9gly1h8gfrgusixj30uc0ejwil.jpg" alt="image-20221124182414047.png"></p>
+<h3 id="git工作区"><a href="#git工作区" class="headerlink" title="git工作区"></a>git工作区</h3><p>工作区就是当前git的仓库的目录，工作区独立于各个分支</p>
+<h3 id="git版本库"><a href="#git版本库" class="headerlink" title="git版本库"></a>git版本库</h3><p>git将所有版本通过一棵有向树的形式存储，存放所有已经提交到本地仓库的代码版本</p>
+<h3 id="git暂存区"><a href="#git暂存区" class="headerlink" title="git暂存区"></a>git暂存区</h3><p>git暂存区是工作区和版本库之间的缓冲区，工作区在向版本库更新时不会直接放入，而是先放入暂存区，最后将暂存区中的内容放入版本库。注意到暂存区是git的一个公共区域，无论当前所处的分支在何处，暂存区都是一样的</p>
+<h3 id="HEAD节点"><a href="#HEAD节点" class="headerlink" title="HEAD节点"></a>HEAD节点</h3><p>当前版本所在的节点，每次创建时向head后加入节点并将内容放入其中</p>
+<h2 id="Git文件状态"><a href="#Git文件状态" class="headerlink" title="Git文件状态"></a>Git文件状态</h2><p>首先对于任何一个文件,在Git内都只有四种状态</p>
+<ul>
+<li>未跟踪 (untracked)</li>
+</ul>
+<blockquote>
+<p>表示没有跟踪 (add) 某个文件的变化，使用 git add 即可跟踪文件</p>
+</blockquote>
+<ul>
+<li>未修改 (unmodified)</li>
+</ul>
+<blockquote>
+<p>表示某文件在跟踪后一直没有改动过或者改动已经被提交</p>
+</blockquote>
+<ul>
+<li>已修改(modified)</li>
+</ul>
+<blockquote>
+<p>表示修改了某个文件- 但还没有加入 (add) 到暂存区中</p>
+</blockquote>
+<ul>
+<li>已暂存 (staged)</li>
+</ul>
+<blockquote>
+<p>表示把已修改的文件放在下次提交 (commit) 时要保存的清单中</p>
+</blockquote>
+<p><img src="http://tva1.sinaimg.cn/large/0075eY9gly1h8gfqu764lj30jq0clac4.jpg" alt="image.png"></p>
+<h2 id="Git常用命令"><a href="#Git常用命令" class="headerlink" title="Git常用命令"></a>Git常用命令</h2><h3 id="git-config设置"><a href="#git-config设置" class="headerlink" title="git config设置"></a>git config设置</h3><p>用于设置git全局信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name xxx</span><br></pre></td></tr></table></figure>
+<p>设置全局用户名，信息记录在~/.gitconfig文件中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email xxx@xxx.com</span><br></pre></td></tr></table></figure>
+<p>设置全局邮箱地址，信息记录在~/.gitconfig文件中</p>
+<h3 id="git-init-配置仓库"><a href="#git-init-配置仓库" class="headerlink" title="git init 配置仓库"></a>git init 配置仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<p>将当前目录配置成git仓库，信息记录在隐藏的.git文件夹中</p>
+<h3 id="git-add-将文件存入暂存区"><a href="#git-add-将文件存入暂存区" class="headerlink" title="git add 将文件存入暂存区"></a>git add 将文件存入暂存区</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add XX</span><br></pre></td></tr></table></figure>
+<p>将XX文件添加到暂存区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure>
+<p>将所有已修改状态文件加入暂存区</p>
+<h3 id="git-commit-将暂存区内容提交到分支"><a href="#git-commit-将暂存区内容提交到分支" class="headerlink" title="git commit 将暂存区内容提交到分支"></a>git commit 将暂存区内容提交到分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;给自己看的备注信息&quot;</span></span><br></pre></td></tr></table></figure>
+<p>commit后暂存区清空</p>
+<h3 id="git-status-查看当前仓库状态"><a href="#git-status-查看当前仓库状态" class="headerlink" title="git status 查看当前仓库状态"></a>git status 查看当前仓库状态</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+<p>用于查看当前仓库跟对应HEAD版本是否存在改动</p>
+<h3 id="git-diff-查看文件相对于暂存区的改动"><a href="#git-diff-查看文件相对于暂存区的改动" class="headerlink" title="git diff 查看文件相对于暂存区的改动"></a>git diff 查看文件相对于暂存区的改动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff</span><br></pre></td></tr></table></figure>
+<p>当工作区有改动，暂存区为空，diff的对比是“工作区与最后一次commit提交的仓库的共同文件”；当工作区有改动，暂存区不为空，diff对比的是“工作区与暂存区的共同文件”</p>
+<h3 id="git-rm-—cached-xx-删除仓库git文件索引"><a href="#git-rm-—cached-xx-删除仓库git文件索引" class="headerlink" title="git rm —cached xx 删除仓库git文件索引"></a>git rm —cached xx 删除仓库git文件索引</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached XX</span><br></pre></td></tr></table></figure>
+<p>删除索引后，文件不再受git管理</p>
+<p>未跟踪状态</p>
+<h3 id="git-rm-xx-同时从工作区和索引删除文件"><a href="#git-rm-xx-同时从工作区和索引删除文件" class="headerlink" title="git rm xx  同时从工作区和索引删除文件"></a>git rm xx  同时从工作区和索引删除文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm xx</span><br></pre></td></tr></table></figure>
+<h3 id="git-restore-撤销工作区更改不改变暂存区内容"><a href="#git-restore-撤销工作区更改不改变暂存区内容" class="headerlink" title="git restore 撤销工作区更改不改变暂存区内容"></a>git restore 撤销工作区更改不改变暂存区内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git restore xx</span><br></pre></td></tr></table></figure>
+<p>该命令将已修改文件变为未修改文件（包括删除），若暂存区有已修改文件，则恢复至暂存区文件，否则为原始版本</p>
+<h3 id="git-restore-—stage-撤出暂存区内容"><a href="#git-restore-—stage-撤出暂存区内容" class="headerlink" title="git restore —stage 撤出暂存区内容"></a>git restore —stage 撤出暂存区内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git restore --stage xx</span><br></pre></td></tr></table></figure>
+<p>将暂存区的文件从暂存区撤出，但不会更改文件的内容</p>
+<p>将文件从已暂存恢复到已修改</p>
+<h3 id="git-log-查看分支"><a href="#git-log-查看分支" class="headerlink" title="git log 查看分支"></a>git log 查看分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<p>查看当前分支的所有版本</p>
+<p>从空走到当前节点的路径</p>
+<h3 id="git-reset-—hard-回滚版本"><a href="#git-reset-—hard-回滚版本" class="headerlink" title="git reset —hard 回滚版本"></a>git reset —hard 回滚版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^ 或 git reset --hard HEAD~</span><br></pre></td></tr></table></figure>
+<p>将代码库回滚到上一个版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^^</span><br></pre></td></tr></table></figure>
+<p>往上回滚两次，以此类推</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD~100</span><br></pre></td></tr></table></figure>
+<p>往上回滚100个版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure>
+<h3 id="git-reflog-查看HEAD指针移动历史"><a href="#git-reflog-查看HEAD指针移动历史" class="headerlink" title="git reflog 查看HEAD指针移动历史"></a>git reflog 查看HEAD指针移动历史</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
+<p>查看HEAD指针的移动历史（包括被回滚的版本）</p>
+<h3 id="git-checkout"><a href="#git-checkout" class="headerlink" title="git checkout"></a>git checkout</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout</span><br></pre></td></tr></table></figure>
+<p>功能同git restore一致</p>
+<h3 id="git-remote-add-origin-git-xxx-关联本地仓库"><a href="#git-remote-add-origin-git-xxx-关联本地仓库" class="headerlink" title="git remote add origin git@xxx: 关联本地仓库"></a>git remote add origin git@xxx: 关联本地仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:xxx/XXX.git</span><br></pre></td></tr></table></figure>
+<p>建立本地仓库与云端仓库的映射</p>
+<h3 id="git-clone-下载远程仓库"><a href="#git-clone-下载远程仓库" class="headerlink" title="git clone 下载远程仓库"></a>git clone 下载远程仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:xxx/XXX.git</span><br></pre></td></tr></table></figure>
+<p>将文件下载到本地</p>
+<h3 id="git-branch-查看所有分支和当前分支"><a href="#git-branch-查看所有分支和当前分支" class="headerlink" title="git branch 查看所有分支和当前分支"></a>git branch 查看所有分支和当前分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+<h3 id="git-checkout-b-创建并切换分支"><a href="#git-checkout-b-创建并切换分支" class="headerlink" title="git checkout -b 创建并切换分支"></a>git checkout -b 创建并切换分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b branch_name</span><br></pre></td></tr></table></figure>
+<p>当前的分支内容与上一个节点内容一致</p>
+<h3 id="git-checkout-切换到某个分支"><a href="#git-checkout-切换到某个分支" class="headerlink" title="git checkout 切换到某个分支"></a>git checkout 切换到某个分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout branch_name</span><br></pre></td></tr></table></figure>
+<h3 id="git-merge-合并分支"><a href="#git-merge-合并分支" class="headerlink" title="git merge  合并分支"></a>git merge  合并分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge branch_name</span><br></pre></td></tr></table></figure>
+<p>将分支branch_name合并到当前分支上(本质上是修改引用)</p>
+<h3 id="git-branch-d-删除分支"><a href="#git-branch-d-删除分支" class="headerlink" title="git branch -d  删除分支"></a>git branch -d  删除分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d branch_name</span><br></pre></td></tr></table></figure>
+<h3 id="git-branch-创建新分支"><a href="#git-branch-创建新分支" class="headerlink" title="git branch 创建新分支"></a>git branch 创建新分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch branch_name</span><br></pre></td></tr></table></figure>
+<h3 id="git-push-推送分支"><a href="#git-push-推送分支" class="headerlink" title="git push 推送分支"></a>git push 推送分支</h3><p>首次推送时要先建立本地仓库与远程仓库主分支的映射关系</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>其中origin表示服务器端，即远程端，master表示主分支名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push</span><br></pre></td></tr></table></figure>
+<p>根据当前分支推送到远程对应的分支</p>
+<h3 id="git-push-—set-upstream-设置远程分支映射"><a href="#git-push-—set-upstream-设置远程分支映射" class="headerlink" title="git push —set-upstream 设置远程分支映射"></a>git push —set-upstream 设置远程分支映射</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --set-upstream origin brabch_name</span><br></pre></td></tr></table></figure>
+<p>—set-upstream设置远程服务器端的分支仓库与本地分支仓库的映射</p>
+<h3 id="git-push-d-删除远程仓库分支"><a href="#git-push-d-删除远程仓库分支" class="headerlink" title="git push -d 删除远程仓库分支"></a>git push -d 删除远程仓库分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -d origin branch_name</span><br></pre></td></tr></table></figure>
+<p>删除远程仓库的<strong>branch_name</strong>分支</p>
+<h3 id="git-pull-拉取分支并合并"><a href="#git-pull-拉取分支并合并" class="headerlink" title="git pull 拉取分支并合并"></a>git pull 拉取分支并合并</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+<p>将远程仓库的当前分支和本地仓库的当前分支合并</p>
+<p>也可使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin branch_name</span><br></pre></td></tr></table></figure>
+<p>表示将远程仓库的<strong>branch_name</strong>分支与当前分支合并</p>
+<h3 id="git-checkout-t-origin-拉取远程分支到本地"><a href="#git-checkout-t-origin-拉取远程分支到本地" class="headerlink" title="git checkout -t origin 拉取远程分支到本地"></a>git checkout -t origin 拉取远程分支到本地</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -t origin/branch_name</span><br></pre></td></tr></table></figure>
+<p>将远程的<code>branch_name</code> 分支拉取到本地</p>
+<h3 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h3><p>git stash 是git中的一个栈空间，可以存放工作区和暂存区尚未提交的修改，常用保存部分可能有参考价值但又需要重写的代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br></pre></td></tr></table></figure>
+<p>将工作区和暂存区中尚未提交的修改存入栈中</p>
+<h3 id="git-stash-apply"><a href="#git-stash-apply" class="headerlink" title="git stash apply"></a>git stash apply</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash apply</span><br></pre></td></tr></table></figure>
+<p>将栈顶存储的修改恢复到当前分支，但不删除栈顶元素</p>
+<h3 id="git-stash-drop"><a href="#git-stash-drop" class="headerlink" title="git stash drop"></a>git stash drop</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash drop</span><br></pre></td></tr></table></figure>
+<p>删除栈顶存储的修改</p>
+<h3 id="git-stash-pop"><a href="#git-stash-pop" class="headerlink" title="git stash pop"></a>git stash pop</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash pop</span><br></pre></td></tr></table></figure>
+<p>将栈顶存储的修改恢复到当前分支，同时删除栈顶元素</p>
+<h3 id="git-stash-list"><a href="#git-stash-list" class="headerlink" title="git stash list"></a>git stash list</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash list</span><br></pre></td></tr></table></figure>
+<p>查看栈中所有元素</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Karthus</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.peakhuang.com/article/2022/Git%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B.html">http://www.peakhuang.com/article/2022/Git%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.peakhuang.com" target="_blank">Peak</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Git/">Git</a></div><div class="post_share"><div class="social-share" data-image="http://tva1.sinaimg.cn/large/0075eY9ggy1h8ib6aw52aj30p00fkdn9.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/article/2022/AcWing1298.html"><img class="next-cover" src="http://tva1.sinaimg.cn/large/0075eY9gly1h1yhr9cbh4j30q40h8ajh.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">AcWing 1298.曹冲养猪</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Karthus</div><div class="author-info__description">心有猛虎，细嗅蔷薇</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Karthus77"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Karthus77" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:yellowstar2001@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客！我会经常分享一些内容！希望对你有所帮助</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">Git使用教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">Git基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git%E5%B7%A5%E4%BD%9C%E5%8C%BA"><span class="toc-number">1.1.1.</span> <span class="toc-text">git工作区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git%E7%89%88%E6%9C%AC%E5%BA%93"><span class="toc-number">1.1.2.</span> <span class="toc-text">git版本库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="toc-number">1.1.3.</span> <span class="toc-text">git暂存区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HEAD%E8%8A%82%E7%82%B9"><span class="toc-number">1.1.4.</span> <span class="toc-text">HEAD节点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81"><span class="toc-number">1.2.</span> <span class="toc-text">Git文件状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.</span> <span class="toc-text">Git常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-config%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">git config设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-init-%E9%85%8D%E7%BD%AE%E4%BB%93%E5%BA%93"><span class="toc-number">1.3.2.</span> <span class="toc-text">git init 配置仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-add-%E5%B0%86%E6%96%87%E4%BB%B6%E5%AD%98%E5%85%A5%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="toc-number">1.3.3.</span> <span class="toc-text">git add 将文件存入暂存区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-commit-%E5%B0%86%E6%9A%82%E5%AD%98%E5%8C%BA%E5%86%85%E5%AE%B9%E6%8F%90%E4%BA%A4%E5%88%B0%E5%88%86%E6%94%AF"><span class="toc-number">1.3.4.</span> <span class="toc-text">git commit 将暂存区内容提交到分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-status-%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E4%BB%93%E5%BA%93%E7%8A%B6%E6%80%81"><span class="toc-number">1.3.5.</span> <span class="toc-text">git status 查看当前仓库状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-diff-%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E7%9B%B8%E5%AF%B9%E4%BA%8E%E6%9A%82%E5%AD%98%E5%8C%BA%E7%9A%84%E6%94%B9%E5%8A%A8"><span class="toc-number">1.3.6.</span> <span class="toc-text">git diff 查看文件相对于暂存区的改动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-rm-%E2%80%94cached-xx-%E5%88%A0%E9%99%A4%E4%BB%93%E5%BA%93git%E6%96%87%E4%BB%B6%E7%B4%A2%E5%BC%95"><span class="toc-number">1.3.7.</span> <span class="toc-text">git rm —cached xx 删除仓库git文件索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-rm-xx-%E5%90%8C%E6%97%B6%E4%BB%8E%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%92%8C%E7%B4%A2%E5%BC%95%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.8.</span> <span class="toc-text">git rm xx  同时从工作区和索引删除文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-restore-%E6%92%A4%E9%94%80%E5%B7%A5%E4%BD%9C%E5%8C%BA%E6%9B%B4%E6%94%B9%E4%B8%8D%E6%94%B9%E5%8F%98%E6%9A%82%E5%AD%98%E5%8C%BA%E5%86%85%E5%AE%B9"><span class="toc-number">1.3.9.</span> <span class="toc-text">git restore 撤销工作区更改不改变暂存区内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-restore-%E2%80%94stage-%E6%92%A4%E5%87%BA%E6%9A%82%E5%AD%98%E5%8C%BA%E5%86%85%E5%AE%B9"><span class="toc-number">1.3.10.</span> <span class="toc-text">git restore —stage 撤出暂存区内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-log-%E6%9F%A5%E7%9C%8B%E5%88%86%E6%94%AF"><span class="toc-number">1.3.11.</span> <span class="toc-text">git log 查看分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-reset-%E2%80%94hard-%E5%9B%9E%E6%BB%9A%E7%89%88%E6%9C%AC"><span class="toc-number">1.3.12.</span> <span class="toc-text">git reset —hard 回滚版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-reflog-%E6%9F%A5%E7%9C%8BHEAD%E6%8C%87%E9%92%88%E7%A7%BB%E5%8A%A8%E5%8E%86%E5%8F%B2"><span class="toc-number">1.3.13.</span> <span class="toc-text">git reflog 查看HEAD指针移动历史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-checkout"><span class="toc-number">1.3.14.</span> <span class="toc-text">git checkout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-remote-add-origin-git-xxx-%E5%85%B3%E8%81%94%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-number">1.3.15.</span> <span class="toc-text">git remote add origin git@xxx: 关联本地仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-clone-%E4%B8%8B%E8%BD%BD%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">1.3.16.</span> <span class="toc-text">git clone 下载远程仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-branch-%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E5%88%86%E6%94%AF%E5%92%8C%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF"><span class="toc-number">1.3.17.</span> <span class="toc-text">git branch 查看所有分支和当前分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-checkout-b-%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="toc-number">1.3.18.</span> <span class="toc-text">git checkout -b 创建并切换分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-checkout-%E5%88%87%E6%8D%A2%E5%88%B0%E6%9F%90%E4%B8%AA%E5%88%86%E6%94%AF"><span class="toc-number">1.3.19.</span> <span class="toc-text">git checkout 切换到某个分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-merge-%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF"><span class="toc-number">1.3.20.</span> <span class="toc-text">git merge  合并分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-branch-d-%E5%88%A0%E9%99%A4%E5%88%86%E6%94%AF"><span class="toc-number">1.3.21.</span> <span class="toc-text">git branch -d  删除分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-branch-%E5%88%9B%E5%BB%BA%E6%96%B0%E5%88%86%E6%94%AF"><span class="toc-number">1.3.22.</span> <span class="toc-text">git branch 创建新分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-push-%E6%8E%A8%E9%80%81%E5%88%86%E6%94%AF"><span class="toc-number">1.3.23.</span> <span class="toc-text">git push 推送分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-push-%E2%80%94set-upstream-%E8%AE%BE%E7%BD%AE%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E6%98%A0%E5%B0%84"><span class="toc-number">1.3.24.</span> <span class="toc-text">git push —set-upstream 设置远程分支映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-push-d-%E5%88%A0%E9%99%A4%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E5%88%86%E6%94%AF"><span class="toc-number">1.3.25.</span> <span class="toc-text">git push -d 删除远程仓库分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-pull-%E6%8B%89%E5%8F%96%E5%88%86%E6%94%AF%E5%B9%B6%E5%90%88%E5%B9%B6"><span class="toc-number">1.3.26.</span> <span class="toc-text">git pull 拉取分支并合并</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-checkout-t-origin-%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="toc-number">1.3.27.</span> <span class="toc-text">git checkout -t origin 拉取远程分支到本地</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-stash"><span class="toc-number">1.3.28.</span> <span class="toc-text">git stash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-stash-apply"><span class="toc-number">1.3.29.</span> <span class="toc-text">git stash apply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-stash-drop"><span class="toc-number">1.3.30.</span> <span class="toc-text">git stash drop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-stash-pop"><span class="toc-number">1.3.31.</span> <span class="toc-text">git stash pop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-stash-list"><span class="toc-number">1.3.32.</span> <span class="toc-text">git stash list</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/article/2022/Git%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B.html" title="Git使用教程"><img src="http://tva1.sinaimg.cn/large/0075eY9ggy1h8ib6aw52aj30p00fkdn9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git使用教程"/></a><div class="content"><a class="title" href="/article/2022/Git%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B.html" title="Git使用教程">Git使用教程</a><time datetime="2022-11-17T06:48:29.000Z" title="发表于 2022-11-17 14:48:29">2022-11-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/2022/AcWing1298.html" title="AcWing 1298.曹冲养猪"><img src="http://tva1.sinaimg.cn/large/0075eY9gly1h1yhr9cbh4j30q40h8ajh.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AcWing 1298.曹冲养猪"/></a><div class="content"><a class="title" href="/article/2022/AcWing1298.html" title="AcWing 1298.曹冲养猪">AcWing 1298.曹冲养猪</a><time datetime="2022-05-06T02:40:45.000Z" title="发表于 2022-05-06 10:40:45">2022-05-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/2022/PrimeSieve.html" title="算法02-素数筛法"><img src="http://tva1.sinaimg.cn/large/0075eY9ggy1h1yhul2eiaj30p00ciqd4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法02-素数筛法"/></a><div class="content"><a class="title" href="/article/2022/PrimeSieve.html" title="算法02-素数筛法">算法02-素数筛法</a><time datetime="2022-05-06T02:40:12.000Z" title="发表于 2022-05-06 10:40:12">2022-05-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/2022/AcWing1294.html" title="AcWing 1294.樱花 题解"><img src="http://tva1.sinaimg.cn/large/0075eY9ggy1h19bzlqas5j32c0340b2c.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AcWing 1294.樱花 题解"/></a><div class="content"><a class="title" href="/article/2022/AcWing1294.html" title="AcWing 1294.樱花 题解">AcWing 1294.樱花 题解</a><time datetime="2022-04-14T08:26:16.000Z" title="发表于 2022-04-14 16:26:16">2022-04-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/2022/AcWing197.html" title="AcWing 197.阶乘分解 题解"><img src="http://tva1.sinaimg.cn/large/0075eY9ggy1h19bs8qj7wj30rs0t1al1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AcWing 197.阶乘分解 题解"/></a><div class="content"><a class="title" href="/article/2022/AcWing197.html" title="AcWing 197.阶乘分解 题解">AcWing 197.阶乘分解 题解</a><time datetime="2022-04-14T08:13:15.000Z" title="发表于 2022-04-14 16:13:15">2022-04-14</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('http://tva1.sinaimg.cn/large/0075eY9gly1gwsyv534kjj31cq0r547a.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Karthus</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hello! Welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'VOF3j9UVasg3yfVgryTJ6XXq-gzGzoHsz',
+      appKey: 'pz8CPKHqgy1SsI0O5D0yo6kl',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
