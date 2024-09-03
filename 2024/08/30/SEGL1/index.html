@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>语义分割学习-转置卷积 | Peak</title><meta name="author" content="surf1over"><meta name="copyright" content="surf1over"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="转置卷积视频链接：转置卷积  运算步骤  计算原理(卷积核翻转原理)传统卷积采用滑动窗口的机制，现在的计算框架采用等效矩阵提高计算效率。   将等效矩阵展平后拼接  使用原始的特征矩阵展平后与等效矩阵做矩阵乘法得到最后的卷积结果。 由于卷积操作中的矩阵$C^{16\times4}$不是方阵，不存在可逆矩阵，因此无法通过计算还原出我们的原始特征矩阵 想要恢复到原特征矩阵的大小，我们可以再等式两边乘上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="语义分割学习-转置卷积">
+<meta property="og:url" content="http://peakhuang.com/2024/08/30/SEGL1/index.html">
+<meta property="og:site_name" content="Peak">
+<meta property="og:description" content="转置卷积视频链接：转置卷积  运算步骤  计算原理(卷积核翻转原理)传统卷积采用滑动窗口的机制，现在的计算框架采用等效矩阵提高计算效率。   将等效矩阵展平后拼接  使用原始的特征矩阵展平后与等效矩阵做矩阵乘法得到最后的卷积结果。 由于卷积操作中的矩阵$C^{16\times4}$不是方阵，不存在可逆矩阵，因此无法通过计算还原出我们的原始特征矩阵 想要恢复到原特征矩阵的大小，我们可以再等式两边乘上">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240901184215.png">
+<meta property="article:published_time" content="2024-08-30T08:27:26.000Z">
+<meta property="article:modified_time" content="2024-09-03T05:01:51.338Z">
+<meta property="article:author" content="surf1over">
+<meta property="article:tag" content="语义分割">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240901184215.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://peakhuang.com/2024/08/30/SEGL1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '语义分割学习-转置卷积',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-03 13:01:51'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.githubusercontent.com/Karthus77/PicBed/main/20240901184215.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Peak"><span class="site-name">Peak</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">语义分割学习-转置卷积</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-30T08:27:26.000Z" title="发表于 2024-08-30 16:27:26">2024-08-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-03T05:01:51.338Z" title="更新于 2024-09-03 13:01:51">2024-09-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="语义分割学习-转置卷积"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="转置卷积"><a href="#转置卷积" class="headerlink" title="转置卷积"></a>转置卷积</h1><p>视频链接：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1mh411J7U4/?spm_id_from=333.999.0.0&vd_source=0a9d6dde69f0db8a30a3f832e4f858c1">转置卷积</a></p>
+<p><img src="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240901180746.png"></p>
+<h2 id="运算步骤"><a href="#运算步骤" class="headerlink" title="运算步骤"></a>运算步骤</h2><p><img src="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240901181548.png"></p>
+<p><img src="C:\Users\surf1over\AppData\Roaming\Typora\typora-user-images\image-20240901181956713.png" alt="image-20240901181956713"></p>
+<h2 id="计算原理-卷积核翻转原理"><a href="#计算原理-卷积核翻转原理" class="headerlink" title="计算原理(卷积核翻转原理)"></a>计算原理(卷积核翻转原理)</h2><p>传统卷积采用滑动窗口的机制，现在的计算框架采用等效矩阵提高计算效率。</p>
+<p><img src="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240901182611.png"></p>
+<p><img src="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240901182643.png"></p>
+<p>将等效矩阵展平后拼接</p>
+<p><img src="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240901182747.png"></p>
+<p>使用原始的特征矩阵展平后与等效矩阵做矩阵乘法得到最后的卷积结果。</p>
+<p>由于卷积操作中的矩阵$C^{16\times4}$不是方阵，<strong>不存在可逆矩阵</strong>，因此无法通过计算还原出我们的原始特征矩阵</p>
+<p>想要恢复到原特征矩阵的大小，我们可以再等式两边乘上矩阵$C$的转置$C^T$</p>
+<p><img src="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240901183242.png"></p>
+<p><img src="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240901183532.png"></p>
+<p>将矩阵$O$和转置矩阵$C^T$的每一列做成等效矩阵$2\times2$的形式</p>
+<p><img src="C:\Users\surf1over\AppData\Roaming\Typora\typora-user-images\image-20240901183853610.png" alt="image-20240901183853610"></p>
+<p>我们发现等效矩阵的运算结果恰与绿色卷积核对原始特征卷积后的结果进行卷积的结果相同。</p>
+<p>进一步发现该卷积核与原始卷积上下、左右翻转得到的卷积核相同。</p>
+<p>这也是我们转置卷积计算过程中翻转卷积核的原理。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://peakhuang.com">surf1over</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://peakhuang.com/2024/08/30/SEGL1/">http://peakhuang.com/2024/08/30/SEGL1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://peakhuang.com" target="_blank">Peak</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">语义分割</a></div><div class="post_share"><div class="social-share" data-image="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240901184215.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/09/01/SEGL2/" title="语义分割学习-FCN网络结构"><img class="cover" src="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240902122734.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">语义分割学习-FCN网络结构</div></div></a></div><div class="next-post pull-right"><a href="/2024/08/28/UNetFormer/" title="UNetFormer-基于UNet架构的Transformer遥感语义分割网络"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">UNetFormer-基于UNet架构的Transformer遥感语义分割网络</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/09/01/SEGL2/" title="语义分割学习-FCN网络结构"><img class="cover" src="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240902122734.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-01</div><div class="title">语义分割学习-FCN网络结构</div></div></a></div><div><a href="/2024/09/02/SEGL3/" title="语义分割学习-膨胀卷积"><img class="cover" src="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240903125710.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-02</div><div class="title">语义分割学习-膨胀卷积</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">surf1over</div><div class="author-info__description">时不我待</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Karthus77" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:yellowstar168@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF"><span class="toc-number">1.</span> <span class="toc-text">转置卷积</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.1.</span> <span class="toc-text">运算步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%8E%9F%E7%90%86-%E5%8D%B7%E7%A7%AF%E6%A0%B8%E7%BF%BB%E8%BD%AC%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">计算原理(卷积核翻转原理)</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/09/02/SEGL3/" title="语义分割学习-膨胀卷积"><img src="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240903125710.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="语义分割学习-膨胀卷积"/></a><div class="content"><a class="title" href="/2024/09/02/SEGL3/" title="语义分割学习-膨胀卷积">语义分割学习-膨胀卷积</a><time datetime="2024-09-02T04:28:44.000Z" title="发表于 2024-09-02 12:28:44">2024-09-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/01/SEGL2/" title="语义分割学习-FCN网络结构"><img src="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240902122734.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="语义分割学习-FCN网络结构"/></a><div class="content"><a class="title" href="/2024/09/01/SEGL2/" title="语义分割学习-FCN网络结构">语义分割学习-FCN网络结构</a><time datetime="2024-09-01T10:43:09.000Z" title="发表于 2024-09-01 18:43:09">2024-09-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/30/SEGL1/" title="语义分割学习-转置卷积"><img src="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240901184215.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="语义分割学习-转置卷积"/></a><div class="content"><a class="title" href="/2024/08/30/SEGL1/" title="语义分割学习-转置卷积">语义分割学习-转置卷积</a><time datetime="2024-08-30T08:27:26.000Z" title="发表于 2024-08-30 16:27:26">2024-08-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/28/UNetFormer/" title="UNetFormer-基于UNet架构的Transformer遥感语义分割网络">UNetFormer-基于UNet架构的Transformer遥感语义分割网络</a><time datetime="2024-08-28T05:56:53.000Z" title="发表于 2024-08-28 13:56:53">2024-08-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/26/CMTFNet/" title="CMTFNet-卷积与多尺度Transformer融合网络在遥感图像语义分割的应用"><img src="https://raw.githubusercontent.com/Karthus77/PicBed/main/20240827094823.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CMTFNet-卷积与多尺度Transformer融合网络在遥感图像语义分割的应用"/></a><div class="content"><a class="title" href="/2024/08/26/CMTFNet/" title="CMTFNet-卷积与多尺度Transformer融合网络在遥感图像语义分割的应用">CMTFNet-卷积与多尺度Transformer融合网络在遥感图像语义分割的应用</a><time datetime="2024-08-26T02:18:38.000Z" title="发表于 2024-08-26 10:18:38">2024-08-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By surf1over</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
